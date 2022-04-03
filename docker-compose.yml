@@ -1,0 +1,23 @@
+version: "2.4"
+services:
+  tailscale:
+    hostname: adguard-dns-hosted
+    image: tailscale/tailscale
+    volumes:
+      - "./obj:/obj:ro"
+      - "./tailscale_var_lib:/var/lib"        # State data will be stored in this directory
+      - "/dev/net/tun:/dev/net/tun"           # Required for tailscale to work
+    cap_add:                                    # Required for tailscale to work
+      - net_admin
+      - sys_module
+    entrypoint: /obj/ent.sh
+    command: --advertise-exit-node -- --verbose 1
+
+  adguardhome:
+    restart: unless-stopped
+    volumes:
+      - './adguard_data:/opt/adguardhome/work'
+      - './adguard_config:/opt/adguardhome/conf'
+    image: adguard/adguardhome
+    network_mode: service:tailscale
+
