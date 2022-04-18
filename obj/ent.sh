@@ -1,6 +1,7 @@
 #!/bin/sh
+set -xe
 apk add --no-cache bash
-sed 1,4d /obj/ent.sh > /tmp/ent.sh
+sed 1,5d /obj/ent.sh > /tmp/ent.sh
 exec bash /tmp/ent.sh "$@"
 #!/bin/bash
 
