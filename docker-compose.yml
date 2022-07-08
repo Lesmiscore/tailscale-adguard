@@ -2,6 +2,7 @@ version: "2.4"
 services:
   tailscale:
     hostname: adguard-dns-hosted
+    restart: unless-stopped
     image: tailscale/tailscale
     volumes:
       - "./obj:/obj:ro"
