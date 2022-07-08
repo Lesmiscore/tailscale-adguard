@@ -13,6 +13,11 @@ services:
       - sys_module
     entrypoint: /obj/ent.sh
     command: --advertise-exit-node -- --verbose 1
+    healthcheck:
+      test: "false"
+      interval: 1d
+      timeout: 10s
+      retries: 3
 
   adguardhome:
     restart: unless-stopped
