@@ -12,7 +12,9 @@ services:
       - net_admin
       - sys_module
     entrypoint: /obj/ent.sh
-    command: --advertise-exit-node -- --verbose 1
+    command: --advertise-exit-node -- -verbose 1 -port 41230
+    ports:
+      - "41230:41230"
     healthcheck:
       test: "false"
       interval: 1d
